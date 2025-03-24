@@ -1,33 +1,29 @@
+name: Test Pipeline
+
 on:
-  pull_request:
-    branches:
-      - '*'
   push:
-    branches:
-      - '*'
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
-env:
-  PYTHON_VERSION: '3.11.8'
-
-name: Test
 jobs:
-  unit-tests:
+  test:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - name: Check out code
+        uses: actions/checkout@v3
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
+      - name: Setup Python 3.9
+        uses: actions/setup-python@v4
         with:
-          python-version: ${{ env.PYTHON_VERSION }}
-          cache: 'pip'
+          python-version: '3.9'
 
-      - name: Upgrade pip
-        run: pip3 install --upgrade pip
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest pytest-cov
 
-      - name: Install python dependencies
-        run: pip3 install -r requirements.txt
-
-      - name: Run unit-tests
-        run: pytest --cov
+      - name: Run tests with coverage
+        run: pytest --cov=.

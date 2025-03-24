@@ -48,7 +48,7 @@ class SimpleServer:
         return {"msg": "Hello World"}
     
     @app.get("/bye")
-    async def read_main():
+    async def read_bye():
         """Implement main endpoint"""
         # Increment counter used for register the total number of calls in the webserver
         REQUESTS.inc()
