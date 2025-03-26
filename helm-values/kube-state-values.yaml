@@ -1,0 +1,12 @@
+kube-state-metrics:
+  prometheusScrape: true
+  selfMonitor:
+    enabled: true
+  metricLabelsAllowlist:
+    - pods=[*]
+    - deployments=[*]
+  metricAllowlist:
+    - kube_pod_container_resource_requests_cpu_cores
+    - kube_pod_container_resource_limits_cpu_cores
+    - kube_pod_container_resource_requests_memory_bytes
+    - kube_pod_container_resource_limits_memory_bytes

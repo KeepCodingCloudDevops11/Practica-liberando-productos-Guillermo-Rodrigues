@@ -1,7 +1,7 @@
 FROM python:3.8.11-alpine3.14
 
 WORKDIR /service/app
-COPY ./src/ /service/app/
+ADD ./src/ /service/app/
 COPY requirements.txt /service/app/
 
 RUN apk --no-cache add curl build-base npm \
@@ -9,6 +9,7 @@ RUN apk --no-cache add curl build-base npm \
     && pip install -r requirements.txt
 
 EXPOSE 8081
+EXPOSE 8000
 
 ENV PYTHONUNBUFFERED=1
 

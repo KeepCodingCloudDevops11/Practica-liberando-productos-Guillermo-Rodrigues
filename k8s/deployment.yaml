@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastapi-app
+  labels:
+    app: fastapi-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fastapi-app
+  template:
+    metadata:
+      labels:
+        app: fastapi-app
+    spec:
+      containers:
+        - name: fastapi
+          image: guillermors28/simple-server:0.0.6
+          ports:
+            - containerPort: 8081
+              name: http
+            - containerPort: 8000
+              name: metrics
+          resources:
+            requests:
+              cpu: "100m"
+            limits:
+              cpu: "200m"

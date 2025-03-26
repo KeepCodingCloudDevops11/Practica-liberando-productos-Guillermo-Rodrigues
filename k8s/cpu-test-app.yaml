@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastapi-app
+  labels:
+    app: fastapi-app
+    app.kubernetes.io/name: fastapi-app
+    app.kubernetes.io/instance: fastapi-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fastapi-app
+  template:
+    metadata:
+      labels:
+        app: fastapi-app
+        app.kubernetes.io/name: fastapi-app
+        app.kubernetes.io/instance: fastapi-app
+        app.kubernetes.io/component: web
+    spec:
+      containers:
+        - name: fastapi
+          image: guillermors28/simple-server:0.0.6
+          ports:
+            - name: http
+              containerPort: 8081
+            - name: metrics
+              containerPort: 8000
+          resources:
+            requests:
+              cpu: "100m"
+            limits:
+              cpu: "200m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fastapi-service
+  labels:
+    app: fastapi-app
+    release: kube-prometheus-stack
+spec:
+  selector:
+    app: fastapi-app
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8081
+    - name: metrics
+      port: 8000
+      targetPort: 8000
+  type: ClusterIP
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: fastapi-monitor
+  namespace: monitoring
+  labels:
+    release: kube-prometheus-stack
+spec:
+  selector:
+    matchLabels:
+      app: fastapi-app
+  namespaceSelector:
+    matchNames:
+      - default
+  endpoints:
+    - port: metrics
+      path: /metrics
+      interval: 15s

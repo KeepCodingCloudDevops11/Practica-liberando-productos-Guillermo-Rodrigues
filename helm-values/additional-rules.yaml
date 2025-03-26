@@ -1,0 +1,22 @@
+additionalPrometheusRules:
+  - name: fastapi-cpu-alert
+    groups:
+      - name: fastapi.rules
+        rules:
+          - alert: FastApiCustomCpuAlert
+            expr: fastapi_cpu_usage > fastapi_cpu_request
+            for: 1m
+            labels:
+              severity: high
+            annotations:
+              summary: "High CPU usage on FastAPI container"
+              description: "Simulated CPU usage exceeds request in FastAPI container."
+
+          - alert: TestSlackAlert
+            expr: bye_requests_total > 5
+            for: 30s
+            labels:
+              severity: critical
+            annotations:
+              summary: "⚠️ Alerta de prueba para Slack"
+              description: "Probando envío de alerta desde Alertmanager a Slack, se ha accedido al endpoint /bye más de 5 veces"
