@@ -34,10 +34,3 @@ jobs:
         run: |
           sed -i "s|https://hooks.slack.com/services/PLACEHOLDER|${{ secrets.SLACK_WEBHOOK_URL }}|" helm-values/alertmanager-config.yaml
 
-      - name: Upgrade kube-prometheus-stack with Helm
-        run: |
-          helm upgrade kube-prometheus-stack prometheus-community/kube-prometheus-stack \
-            --namespace monitoring \
-            -f helm-values/alertmanager.yaml \
-            -f helm-values/additional-rules.yaml \
-            --install
