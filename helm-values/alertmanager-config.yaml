@@ -21,7 +21,7 @@ alertmanager:
             channel: '#guillermo-prometheus-alarms'   # Canal real
             username: 'PrometheusBot'
             icon_emoji: ':rotating_light:'
-            api_url: 'https://hooks.slack.com/services/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'
+            api_url: 'https://hooks.slack.com/services/PLACEHOLDER'
             title: "*[{{ .Status | toUpper }}]* {{ .CommonLabels.alertname }}"
             text: >
               {{ range .Alerts }}

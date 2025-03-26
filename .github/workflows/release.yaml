@@ -32,7 +32,7 @@ jobs:
 
       - name: Replace Slack webhook in Alertmanager config
         run: |
-          sed -i "s|https://hooks.slack.com/services/PLACEHOLDER|${{ secrets.SLACK_WEBHOOK_URL }}|" helm-values/alertmanager.yaml
+          sed -i "s|https://hooks.slack.com/services/PLACEHOLDER|${{ secrets.SLACK_WEBHOOK_URL }}|" helm-values/alertmanager-config.yaml
 
       - name: Upgrade kube-prometheus-stack with Helm
         run: |

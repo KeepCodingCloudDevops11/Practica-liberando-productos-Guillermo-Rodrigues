@@ -23,6 +23,10 @@ HEALTHCHECK_REQUESTS = Counter('healthcheck_requests_total', 'Total number of re
 MAIN_ENDPOINT_REQUESTS = Counter('main_requests_total', 'Total number of requests to main endpoint')
 BYE_ENDPOINT_REQUESTS = Counter('bye_requests_total', 'Total number of requests to the /bye endpoint')
 
+# ESTE CONTADOR DE ARRANQUE
+APP_STARTS = Counter('fastapi_app_starts_total', 'App boot counter')
+APP_STARTS.inc() # Esto debe ejecutarse UNA vez al inicio
+
 # Métricas simuladas para alerta de CPU
 CPU_REQUEST = Gauge('fastapi_cpu_request', 'Simulated CPU request for FastAPI')
 CPU_USAGE = Gauge('fastapi_cpu_usage', 'Simulated CPU usage for FastAPI')

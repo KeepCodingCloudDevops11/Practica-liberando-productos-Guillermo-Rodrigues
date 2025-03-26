@@ -1,0 +1,75 @@
+{
+    "title": "FastAPI Dashboard",
+    "panels": [
+      {
+        "type": "stat",
+        "title": "Llamadas a /",
+        "targets": [{"expr": "main_requests_total"}],
+        "gridPos": { "x": 0, "y": 0, "w": 6, "h": 4 }
+      },
+      {
+        "type": "stat",
+        "title": "Llamadas a /health",
+        "targets": [{"expr": "healthcheck_requests_total"}],
+        "gridPos": { "x": 6, "y": 0, "w": 6, "h": 4 }
+      },
+      {
+        "type": "stat",
+        "title": "Llamadas a /bye",
+        "targets": [{"expr": "bye_requests_total"}],
+        "gridPos": { "x": 0, "y": 4, "w": 6, "h": 4 }
+      },
+      {
+        "type": "stat",
+        "title": "Reinicios de la App",
+        "targets": [{"expr": "fastapi_app_starts_total"}],
+        "gridPos": { "x": 6, "y": 4, "w": 6, "h": 4 }
+      },
+      {
+        "type": "stat",
+        "title": "Uso actual de CPU (real)",
+        "targets": [
+          {
+            "expr": "sum by(pod) (rate(container_cpu_usage_seconds_total{namespace=\"default\", pod=~\"fastapi.*\"}[2m]))"
+          }
+        ],
+        "gridPos": { "x": 0, "y": 8, "w": 6, "h": 4 }
+      },
+      {
+        "type": "stat",
+        "title": "CPU Request asignado",
+        "targets": [
+          {
+            "expr": "sum by(pod) (kube_pod_container_resource_requests_cpu_cores{namespace=\"default\", pod=~\"fastapi.*\"})"
+          }
+        ],
+        "gridPos": { "x": 6, "y": 8, "w": 6, "h": 4 }
+      },
+      {
+        "type": "table",
+        "title": "Alertas Activas",
+        "targets": [{"expr": "ALERTS{alertstate=\"firing\"}"}],
+        "gridPos": { "x": 0, "y": 12, "w": 12, "h": 6 }
+      },
+      {
+        "type": "stat",
+        "title": "Reinicios del contenedor",
+        "targets": [
+          {
+            "expr": "rate(kube_pod_container_status_restarts_total{namespace=\"default\"}[5m])"
+          }
+        ],
+        "gridPos": { "x": 0, "y": 18, "w": 6, "h": 4 }
+      },
+      {
+        "type": "stat",
+        "title": "Total de peticiones",
+        "targets": [{"expr": "server_requests_total"}],
+        "gridPos": { "x": 6, "y": 18, "w": 6, "h": 4 }
+      }
+    ],
+    "schemaVersion": 35,
+    "version": 1,
+    "refresh": "5s"
+  }
+  
