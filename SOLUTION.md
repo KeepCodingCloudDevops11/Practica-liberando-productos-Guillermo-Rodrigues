@@ -885,6 +885,7 @@ y entramos a traves del navegador con ```http://localhost:3000```. Al acceder po
 Ahora tenemos que crear un nuevo dashboard, como ya tenemos nuestro archivo configuramos podemos importarlo desde la interfaz. En los paneles podremos ver el uso de CPU así como las veces que se reinicia, alertas, llamadas a servicios...
 
 Para hacer pruebas y ver los valores cambiar en Grafana hacemos
+
 ```bash
 kubectl port-forward svc/fastapi-service 8081:80
 ```
