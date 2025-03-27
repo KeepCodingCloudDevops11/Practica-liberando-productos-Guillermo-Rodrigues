@@ -874,7 +874,9 @@ Accedemos a nuestro Slack y creamos un canal.
 * **Grafana**
 
 Para acceder a Grafana hacemos que este disponible primero
-```bash kubectl port-forward svc/kube-prometheus-stack-grafana -n monitoring 3000:80
+
+```bash
+kubectl port-forward svc/kube-prometheus-stack-grafana -n monitoring 3000:80
 ```
 y entramos a traves del navegador con ```http://localhost:3000```. Al acceder por primera vez, las credenciales por defecto son
 - Usuario: admin
