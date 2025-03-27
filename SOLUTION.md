@@ -897,5 +897,5 @@ y las peticiones ```curl http://localhost:8081/bye```  ```curl http://localhost:
 
 
 ---
-Creado por: Guillermo Rodrigues BOtias  
+Creado por: Guillermo Rodrigues Botias  
 © 2025
