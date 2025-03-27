@@ -1,5 +1,13 @@
 
-# Este es el README.md original de referencia, para ver la práctica el archivo es SOLUTION.md
+## Este es el README.md original de referencia.
+
+# Para ver la práctica final de *Guillermo Rodrigues Botias* el archivo es: [SOLUTION.md](https://github.com/GuilleRsB/Practica-final-liberando-productos-Guillermo-Rodrigues/blob/main/SOLUTION.md)
+
+
+
+
+
+
 
 
 ## keepcoding-devops-liberando-productos-practica-final
