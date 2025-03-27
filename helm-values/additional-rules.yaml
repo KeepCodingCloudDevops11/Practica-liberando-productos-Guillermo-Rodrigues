@@ -13,10 +13,10 @@ additionalPrometheusRules:
               description: "Simulated CPU usage exceeds request in FastAPI container."
 
           - alert: TestSlackAlert
-            expr: bye_requests_total > 5
+            expr: increase(bye_requests_total[2m]) > 5
             for: 30s
             labels:
               severity: critical
             annotations:
               summary: "⚠️ Alerta de prueba para Slack"
-              description: "Probando envío de alerta desde Alertmanager a Slack, se ha accedido al endpoint /bye más de 5 veces"
+              description: "Se ha accedido al endpoint /bye más de 5 veces en los últimos 2 minutos"
