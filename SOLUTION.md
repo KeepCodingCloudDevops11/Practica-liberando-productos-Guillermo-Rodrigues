@@ -819,7 +819,17 @@ helm repo update
 
 * Verificamos Prometheus
 
-En la carpeta raíz donde se encuentre el archivo```bash .\prometheus.exe --config.file=prometheus.yml```, también podemos abrir puerto ```bash kubectl port-forward svc/kube-prometheus-stack-prometheus 9090:9090 -n monitoring``` y entramos con ```http://localhost:9090``` en el navegador.
+En la carpeta raíz donde se encuentre el archivo
+
+```bash
+.\prometheus.exe --config.file=prometheus.yml
+```
+también podemos abrir puerto
+```bash
+kubectl port-forward svc/kube-prometheus-stack-prometheus 9090:9090 -n monitoring
+```
+y entramos con ```http://localhost:9090``` en el navegador.
+
 [Otra forma de acceder](https://github.com/GuilleRsB/Practica-final-liberando-productos-Guillermo-Rodrigues/blob/main/img%20cambios%20aplicados/Captura%20de%20pantalla%202025-03-26%20153703.png)
 
 En la pestaña de status/target vemos que todo este UP.
@@ -835,7 +845,8 @@ En alerts veremos las dos alertas configuradas, de cpu y acceso de más de cinco
 [FIRING + RESOLVED](https://github.com/GuilleRsB/Practica-final-liberando-productos-Guillermo-Rodrigues/blob/main/img%20cambios%20aplicados/firing%20%2B%20resolved%20cpu.png)
 
 Para acceder a la interfaz de Alertmanager
-```bash kubectl port-forward svc/kube-prometheus-stack-alertmanager 9093:9093 -n monitoring
+```bash
+kubectl port-forward svc/kube-prometheus-stack-alertmanager 9093:9093 -n monitoring
 ```
 En el navegador con ```http://localhost:9093``` veremos si se activan.
 
@@ -871,7 +882,11 @@ y entramos a traves del navegador con ```http://localhost:3000```. Al acceder po
 
 Ahora tenemos que crear un nuevo dashboard, como ya tenemos nuestro archivo configuramos podemos importarlo desde la interfaz. En los paneles podremos ver el uso de CPU así como las veces que se reinicia, alertas, llamadas a servicios...
 
-Para hacer pruebas y ver los valores cambiar en Grafana hacemos ```bash kubectl port-forward svc/fastapi-service 8081:80 ``` y las peticiones ```curl http://localhost:8081/bye```  ```curl http://localhost:8081/health```  ```curl http://localhost:8081```
+Para hacer pruebas y ver los valores cambiar en Grafana hacemos
+```bash
+kubectl port-forward svc/fastapi-service 8081:80
+```
+y las peticiones ```curl http://localhost:8081/bye```  ```curl http://localhost:8081/health```  ```curl http://localhost:8081```
 
 [Lectura Grafana](https://github.com/GuilleRsB/Practica-final-liberando-productos-Guillermo-Rodrigues/blob/main/img%20cambios%20aplicados/Grafana.png)
 
