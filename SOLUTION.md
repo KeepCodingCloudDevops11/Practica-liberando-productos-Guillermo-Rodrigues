@@ -6,8 +6,7 @@ Practica CICD Guillermo Rodrigues
 
 * [*Primera parte*](#primera-parte) : Objetivo, Requisitos y Estructura
 * [*Segunda parte*](#segunda-parte) : Archivos necesarios
-* [*Tercera parte*](#tercera-parte) : Configuracion
-* [*Cuarta parte*](#cuarta-parte) : 
+* [*Tercera parte*](#tercera-parte) : Configuracion 
 
 ## Primera Parte
 
@@ -726,12 +725,19 @@ python -m venv venv
 .\venv\Scripts\Activate.ps1
 pip install -r requirements.txt
 ```
+[Entorno virtual](https://github.com/GuilleRsB/Practica-final-liberando-productos-Guillermo-Rodrigues/blob/main/img%20cambios%20aplicados/Prueba%20app.py%20con%20modificaciones.png)
+
+
 y ejecutamos los test:
 ```bash
 pytest
 pytest --cov
 pytest --cov --cov-report=html
 ```
+
+[Test](https://github.com/GuilleRsB/Practica-final-liberando-productos-Guillermo-Rodrigues/blob/main/img%20cambios%20aplicados/TEst%20con%20nuevo%20endpoint.png)
+[Test2](https://github.com/GuilleRsB/Practica-final-liberando-productos-Guillermo-Rodrigues/blob/main/img%20cambios%20aplicados/Test%20completos.png)
+
 
 * Construimos la imagen y la arrancamos, recordar que cada cambio en ficheros habrá que volver a ejceutar:
 
@@ -742,6 +748,10 @@ docker push guillermors28/simple-server:0.0.6
 kubectl set image deploy/fastapi-app fastapi=guillermors28/simple-server:0.0.6
 docker run -d -p 8000:8000 -p 8081:8081 --name simple-server guillermors28/simple-server:0.0.6
 ```
+[Aplicaicon funcionando](https://github.com/GuilleRsB/Practica-final-liberando-productos-Guillermo-Rodrigues/blob/main/img%20cambios%20aplicados/App%20funcionando.png)
+[Prueba local bye](https://github.com/GuilleRsB/Practica-final-liberando-productos-Guillermo-Rodrigues/blob/main/img%20cambios%20aplicados/Captura%20de%20pantalla%202025-03-24%20212033.png)
+[Metricas local bye](https://github.com/GuilleRsB/Practica-final-liberando-productos-Guillermo-Rodrigues/blob/main/img%20cambios%20aplicados/Captura%20de%20pantalla%202025-03-26%20152913.png)
+
 
 * **Desplegamos aplicación en kubernetes**
 
@@ -764,6 +774,8 @@ kubectl get servicemonitor -n monitoring
 Configuramos las variables de entorno.
 
 * Hacmos un push en la rama main de nuestro proyecto a Github, en la pestaña Actions podemos ver el estado y los test.
+[GitHub ACtions ok](https://github.com/GuilleRsB/Practica-final-liberando-productos-Guillermo-Rodrigues/blob/main/img%20cambios%20aplicados/Actions%20ok.png)
+
 
 * Podemos obtener los logs del contendor ynos dará:
 ```bash docker logs -f simple-server```
@@ -781,6 +793,9 @@ pip list
 * Podemos abrir puerto ```bash kubectl port-forward svc/fastapi-service 8081:80``` y probar
 ```bash curl http://localhost:8081/ -H "accept: application/json -v"``` esto para main, lo mismo para /heatlh y /bye. 
 Para ver las métricas acabara ```curl http://localhost:8000/metrics``` y cada vez que se acceda a un servicio veremos como incrementa en métricas.
+
+[Métricas](https://github.com/GuilleRsB/Practica-final-liberando-productos-Guillermo-Rodrigues/blob/main/img%20cambios%20aplicados/M%C3%A9tricas.png)
+[GitHub Actions](https://github.com/GuilleRsB/Practica-final-liberando-productos-Guillermo-Rodrigues/blob/main/img%20cambios%20aplicados/pipline%20CICD%20github%20actions.png)
 
 * **Prometheus**
 
@@ -800,9 +815,12 @@ helm repo add prometheus-community https://prometheus-community.github.io/helm-c
 helm repo update
 ```
 
+[Prometheus up](https://github.com/GuilleRsB/Practica-final-liberando-productos-Guillermo-Rodrigues/blob/main/img%20cambios%20aplicados/Target%20up.png)
+
 * Verificamos Prometheus
 
 En la carpeta raíz donde se encuentre el archivo```bash .\prometheus.exe --config.file=prometheus.yml```, también podemos abrir puerto ```bash kubectl port-forward svc/kube-prometheus-stack-prometheus 9090:9090 -n monitoring``` y entramos con ```http://localhost:9090``` en el navegador.
+[Otra forma de acceder](https://github.com/GuilleRsB/Practica-final-liberando-productos-Guillermo-Rodrigues/blob/main/img%20cambios%20aplicados/Captura%20de%20pantalla%202025-03-26%20153703.png)
 
 En la pestaña de status/target vemos que todo este UP.
 
@@ -810,10 +828,23 @@ En la parte de Graph, en query podemos ver el consumo de cpu con ```bash sum(rat
 
 En alerts veremos las dos alertas configuradas, de cpu y acceso de más de cinco veces a bye, irán camabiado de estado FIRING a RESOLVED en función si cumplen las condiciones o no.
 
+[Alerta cpu](https://github.com/GuilleRsB/Practica-final-liberando-productos-Guillermo-Rodrigues/blob/main/img%20cambios%20aplicados/firing%20cpu.png)
+[Alertas FIRING](https://github.com/GuilleRsB/Practica-final-liberando-productos-Guillermo-Rodrigues/blob/main/img%20cambios%20aplicados/Captura%20de%20pantalla%202025-03-25%20164619.png)
+[Alerta pending](https://github.com/GuilleRsB/Practica-final-liberando-productos-Guillermo-Rodrigues/blob/main/img%20cambios%20aplicados/Captura%20de%20pantalla%202025-03-26%20172218.png)
+[Alerta resuelta](https://github.com/GuilleRsB/Practica-final-liberando-productos-Guillermo-Rodrigues/blob/main/img%20cambios%20aplicados/Captura%20de%20pantalla%202025-03-25%20212836.png)
+[FIRING + RESOLVED](https://github.com/GuilleRsB/Practica-final-liberando-productos-Guillermo-Rodrigues/blob/main/img%20cambios%20aplicados/firing%20%2B%20resolved%20cpu.png)
+
 Para acceder a la interfaz de Alertmanager
 ```bash kubectl port-forward svc/kube-prometheus-stack-alertmanager 9093:9093 -n monitoring
 ```
 En el navegador con ```http://localhost:9093``` veremos si se activan.
+
+[Prometheus Targets](https://github.com/GuilleRsB/Practica-final-liberando-productos-Guillermo-Rodrigues/blob/main/img%20cambios%20aplicados/Prometheus%20target.png)
+[Lectura Prometheus](https://github.com/GuilleRsB/Practica-final-liberando-productos-Guillermo-Rodrigues/blob/main/img%20cambios%20aplicados/Lectura%20cpu%20prometehus.png)
+[Prometheus bye](https://github.com/GuilleRsB/Practica-final-liberando-productos-Guillermo-Rodrigues/blob/main/img%20cambios%20aplicados/Prometheus%20bye.png)
+[Prometheus health](https://github.com/GuilleRsB/Practica-final-liberando-productos-Guillermo-Rodrigues/blob/main/img%20cambios%20aplicados/Prometheus%20health.png)
+[Prometheus main](https://github.com/GuilleRsB/Practica-final-liberando-productos-Guillermo-Rodrigues/blob/main/img%20cambios%20aplicados/Prometheus%20main.png)
+[Prometheus server](https://github.com/GuilleRsB/Practica-final-liberando-productos-Guillermo-Rodrigues/blob/main/img%20cambios%20aplicados/Prometheus%20server.png)
 
 * **Slack**
 
@@ -823,6 +854,11 @@ Accedemos a nuestro Slack y creamos un canal.
 - Creamos un Webhook entrante, nos dará la url para nuestro archivo alertmanager.yaml.
 - Aplicamos la configuración helm, desde nuestro proyecto para actualizarlo.
 - Aplicamos ```bash kubectl port-forward svc/kube-prometheus-stack-alertmanager -n monitoring 9093:9093``` y accedemos al navegador ```http://localhost:9093``` y veremos las alertas.
+
+[Webhooks](https://github.com/GuilleRsB/Practica-final-liberando-productos-Guillermo-Rodrigues/blob/main/img%20cambios%20aplicados/Slack.png)
+
+[FIRING bye](https://github.com/GuilleRsB/Practica-final-liberando-productos-Guillermo-Rodrigues/blob/main/img%20cambios%20aplicados/Resolved%20slack.png)
+[RESOLVED bye](https://github.com/GuilleRsB/Practica-final-liberando-productos-Guillermo-Rodrigues/blob/main/img%20cambios%20aplicados/Resolved.png)
 
 * **Grafana**
 
@@ -837,8 +873,7 @@ Ahora tenemos que crear un nuevo dashboard, como ya tenemos nuestro archivo conf
 
 Para hacer pruebas y ver los valores cambiar en Grafana hacemos ```bash kubectl port-forward svc/fastapi-service 8081:80 ``` y las peticiones ```curl http://localhost:8081/bye```  ```curl http://localhost:8081/health```  ```curl http://localhost:8081```
 
-
-
+[Lectura Grafana](https://github.com/GuilleRsB/Practica-final-liberando-productos-Guillermo-Rodrigues/blob/main/img%20cambios%20aplicados/Grafana.png)
 
 
 
