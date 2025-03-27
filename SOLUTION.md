@@ -11,7 +11,7 @@ Practica liberando productos Guillermo Rodrigues Botias
 ## Primera Parte
 
 En esta practica vamos a partir del siguiente repositorio 
-```bash https://github.com/KeepCodingCloudDevops11/liberando-productos-practica-final.git ```, haremos un fork y sobre el aplicaremos nuestros cambios cambios. Es una aplicación basada en FastAPI desplegada en kubernetes.
+```https://github.com/KeepCodingCloudDevops11/liberando-productos-practica-final.git ```, haremos un fork y sobre el aplicaremos nuestros cambios cambios. Es una aplicación basada en FastAPI desplegada en kubernetes.
 
 * Tendrá las siguientes funcionalidades:
 - Desarrollo y extensión de una API con un nuevo endpoint.
