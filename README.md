@@ -775,6 +775,8 @@ Configuramos las variables de entorno.
 
 * Hacmos un push en la rama main de nuestro proyecto a Github, en la pestaña Actions podemos ver el estado y los test.
 [GitHub ACtions ok](https://github.com/GuilleRsB/Practica-final-liberando-productos-Guillermo-Rodrigues/blob/main/img%20cambios%20aplicados/Actions%20ok.png)
+[Actions](https://github.com/KeepCodingCloudDevops11/Practica-liberando-productos-Guillermo-Rodrigues/blob/main/img%20cambios%20aplicados/Actions%202.png)
+[Actions2](https://github.com/KeepCodingCloudDevops11/Practica-liberando-productos-Guillermo-Rodrigues/blob/main/img%20cambios%20aplicados/Actions%203.png)
 
 
 * Podemos obtener los logs del contendor ynos dará:
